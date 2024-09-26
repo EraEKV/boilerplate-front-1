@@ -5,24 +5,22 @@ const FileUpload = () => {
     const [file, setFile] = useState<string | undefined>();
     const [fileEnter, setFileEnter] = useState(false);
 
-    // Обработчик для DragOver
     const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         setFileEnter(true);
     };
 
-    // Обработчик для DragLeave
     const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
         setFileEnter(false);
     };
 
-    // Обработчик для Drop
     const handleDrop = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         setFileEnter(false);
 
         if (e.dataTransfer.items) {
-            [...e.dataTransfer.items].forEach((item, i) => {
+            Array.from(e.dataTransfer.items).forEach((item, i) => {
                 if (item.kind === "file") {
                     const file = item.getAsFile();
                     if (file) {
@@ -33,13 +31,12 @@ const FileUpload = () => {
                 }
             });
         } else {
-            [...e.dataTransfer.files].forEach((file, i) => {
+            Array.from(e.dataTransfer.files).forEach((file, i) => {
                 console.log(`… file[${i}].name = ${file.name}`);
             });
         }
     };
 
-    // Обработчик для изменения input типа file
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files && files[0]) {
