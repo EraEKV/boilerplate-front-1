@@ -1,5 +1,6 @@
 import Header from "@/app/widgets/Header";
 import DropFile from "@/app/widgets/DropFile";
+import RequestForm from "./widgets/RequestFrom";
 
 
 export default function Home() {
@@ -8,7 +9,7 @@ export default function Home() {
         <Header />
         <DropFile />
 
-
+        <RequestForm />
     </div>
   );
 }
