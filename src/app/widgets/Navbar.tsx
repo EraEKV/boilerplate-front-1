@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Button } from '../shared/ui/button';
 
 const Navbar = () => {
-    const hiddenPaths = ["/sing-in", "/sign-up"];
+    const hiddenPaths = ["/sign-in", "/sign-up"];
     const path = usePathname();
     const isHiding = hiddenPaths.some((el) => path === el);
 
@@ -36,9 +37,8 @@ const Navbar = () => {
                         <Link href="/">MyLogo</Link>
                     </div>
 
-                    <div className={`flex justify-between items-center gap-x-10 ${isScrolled ? "text-sm" : "text-base"}`}>
-                        <ul className={`hidden md:flex space-x-8
-                            `}>
+                    <div className={`flex justify-between items-center gap-x-10 ${isScrolled ? "text-base" : "text-lg"}`}>
+                        <ul className={`hidden md:flex space-x-8`}>
                             <li>
                                 <Link href="/homepage" className="text-gray-600 hover:text-gray-900">Home</Link>
                             </li>
@@ -49,12 +49,11 @@ const Navbar = () => {
                                 <Link href="/profile" className="text-gray-600 hover:text-gray-900">Profile</Link>
                             </li>
                         </ul>
-                        <Link href="/sign-in">
-                            <button
-                                className="bg-primary text-white px-4 py-2 hover:bg-secondary rounded-lg transition duration-300 ease-in-out">
-                                Sign In
-                            </button>
-                        </Link>
+                        <Button className='text-base'>
+                            <Link href="/sign-up">
+                                Sign up
+                            </Link>
+                        </Button>
                     </div>
 
                 </div>

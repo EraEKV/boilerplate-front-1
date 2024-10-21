@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import HeaderFooter from "./widgets/HeaderFooter";
+import Navbar from "./widgets/Navbar";
 
 export const metadata: Metadata = {
   title: "Boilerplate",
@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-open-sans antialiased">
-        <HeaderFooter />
+        <Navbar />
         {children}
       </body>
     </html>
