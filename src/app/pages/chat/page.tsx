@@ -19,7 +19,7 @@ export default function Component() {
   const socket = useRef<ReturnType<typeof io> | null>(null);
 
   useEffect(() => {
-    socket.current = io(process.env.NEXT_PUBLIC_WS_ORIGIN || 'ws://localhost:5000', {
+    socket.current = io(process.env.NEXT_PUBLIC_BACKEND_ORIGIN || 'ws://localhost:5000', {
       reconnectionDelayMax: 10000,
       transports: ["websocket"],
     });
