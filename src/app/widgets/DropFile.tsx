@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, DragEvent, ChangeEvent } from "react";
 
 const FileUpload = () => {
@@ -54,7 +55,7 @@ const FileUpload = () => {
                     onDrop={handleDrop}
                     className={`${
                         fileEnter ? "border-4" : "border-2"
-                    } mx-auto bg-white flex flex-col w-full max-w-xs h-72 border-dashed items-center justify-center cursor-pointer`}
+                    } mx-auto bg-white flex flex-col w-full max-w-xs h-72 border-dashed items-center justify-center cursor-pointer rounded-lg hover:border-primary transition duration-300 ease-in-out`}
                 >
                     <label
                         htmlFor="file"
@@ -78,9 +79,9 @@ const FileUpload = () => {
                     />
                     <button
                         onClick={() => setFile(undefined)}
-                        className="px-4 mt-10 uppercase py-2 tracking-widest outline-none bg-red-600 text-white rounded"
+                        className="px-4 mt-10 uppercase py-2 tracking-widest outline-none bg-primary text-white rounded-lg"
                     >
-                        Reset
+                        Remove
                     </button>
                 </div>
             )}
