@@ -109,7 +109,7 @@ export default function Component() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
-            className="flex-grow py-5 rounded-xl"
+            className="flex-grow py-5 h-[50px] rounded-xl"
           />
           {isStreaming ? (
             <Button onClick={handleStopStreaming} className="bg-primary rounded-xl w-12 h-12 p-0">
