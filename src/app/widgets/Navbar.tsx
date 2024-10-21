@@ -2,22 +2,43 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
     const hiddenPaths = ["/sing-in", "/sign-up"];
     const path = usePathname();
     const isHiding = hiddenPaths.some((el) => path === el);
+
+    const [isScrolled, setIsScrolled] = useState(false)
+
+    useEffect(() => {
+        const handleScroll = () => {
+        if (window.scrollY > 50) {
+            setIsScrolled(true)
+        } else {
+            setIsScrolled(false)
+        }
+        }
+
+        window.addEventListener('scroll', handleScroll)
+
+        return () => {
+        window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
     
     return (
-        isHiding && (
+        !isHiding && (
             <nav className="bg-bg fixed w-full border-b shadow-lg">
-                <div className="container mx-auto flex justify-between items-center py-4 px-6 text-primary">
+                <div className={`mx-auto flex justify-between items-center px-6 text-primary z-50 transition-all duration-300 ease-in-out
+                    ${isScrolled ? "py-3" : "py-5"}`}>
                     <div className="text-xl font-bold">
                         <Link href="/">MyLogo</Link>
                     </div>
 
-                    <div className={"flex justify-between items-center gap-x-10"}>
-                        <ul className="hidden md:flex space-x-8">
+                    <div className={`flex justify-between items-center gap-x-10 ${isScrolled ? "text-sm" : "text-base"}`}>
+                        <ul className={`hidden md:flex space-x-8
+                            `}>
                             <li>
                                 <Link href="/homepage" className="text-gray-600 hover:text-gray-900">Home</Link>
                             </li>
