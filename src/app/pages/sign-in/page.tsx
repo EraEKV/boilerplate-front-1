@@ -13,7 +13,7 @@ const SignIn = () => {
                 <div className="text-center spcae-y-5">
                     <Button className="flex items-center font-semibold text-primary text-base py-8 justify-center w-full mb-4 shadow-md bg-gray-50 hover:text-white">
                         <Image 
-                            src="/images/google.png" 
+                            src="/icons/google.png" 
                             className="size-7 mr-2"
                             width={48}
                             height={48}
