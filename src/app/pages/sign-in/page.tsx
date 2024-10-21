@@ -2,6 +2,7 @@ import React from "react";
 import { Label } from "@/app/shared/ui/label";
 import { Input } from "@/app/shared/ui/input";
 import { Button } from "@/app/shared/ui/button";
+import Image from "next/image";
 
 const SignIn = () => {
     return (
@@ -10,8 +11,13 @@ const SignIn = () => {
                 <h1 className="text-3xl font-semibold text-center text-gray-800">Welcome, friend!</h1>
 
                 <div className="text-center spcae-y-5">
-                    <Button className="flex items-center justify-center w-full mb-4 bg-white text-primary hover:bg-gray-50 transition duration-200 ease-in-out">
-                        {/* <img src="/path/to/google-icon.png" alt="Google" className="w-5 h-5 mr-2"/> Sign in with Google */}
+                    <Button className="flex items-center font-semibold text-primary text-base py-8 justify-center w-full mb-4 shadow-md bg-gray-50 hover:text-white">
+                        <Image 
+                            src="/images/google.png" 
+                            className="size-7 mr-2"
+                            width={48}
+                            height={48}
+                            alt="Google" /> 
                         Sign in with Google
                     </Button>
                     <p className="text-gray-600">Or sign in with</p>
