@@ -5,6 +5,7 @@ import { Send, Square } from 'lucide-react'
 import { Button } from "@/app/shared/ui/button"
 import { Input } from "@/app/shared/ui/input"
 import { io } from 'socket.io-client'
+import ReactMarkdown from 'react-markdown'
 
 interface MessageData {
   role: "user" | "assistant"; 
@@ -19,7 +20,7 @@ export default function Component() {
   const socket = useRef<ReturnType<typeof io> | null>(null);
 
   useEffect(() => {
-    socket.current = io(process.env.NEXT_PUBLIC_BACKEND_ORIGIN || 'ws://localhost:5000', {
+    socket.current = io(process.env.NEXT_PUBLIC_WS_ORIGIN || 'ws://localhost:5000', {
       reconnectionDelayMax: 10000,
       transports: ["websocket"],
     });
@@ -96,7 +97,7 @@ export default function Component() {
             <div
               className={`max-w-[70%] rounded-lg p-3 mb-5 ${message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
             >
-              {message.content}
+              <ReactMarkdown>{message.content}</ReactMarkdown>
             </div>
           </div>
         ))}
