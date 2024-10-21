@@ -1,10 +1,20 @@
+"use client"
+
 import React from "react";
 import { Label } from "@/app/shared/ui/label";
 import { Input } from "@/app/shared/ui/input";
 import { Button } from "@/app/shared/ui/button";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const SignIn = () => {
+    const router = useRouter();
+
+
+    const handleSubmit = () => {
+        router.push('/homepage')
+    }
+
     return (
         <div className="flex justify-center items-center w-full min-h-screen bg-gray-200">
             <div className="w-[400px] h-[550px] bg-white shadow-lg rounded-lg p-8 space-y-6">
@@ -32,7 +42,7 @@ const SignIn = () => {
                     <Input type="password" id="password" placeholder="Enter your password" className="border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent"/>
                 </div>
 
-                <Button className="w-full bg-primary text-white hover:bg-gray-800 transition duration-200">Sign In</Button>
+                <Button onClick={handleSubmit} className="w-full bg-primary text-white hover:bg-gray-800 transition duration-200">Sign In</Button>
                 
                 
             </div>
