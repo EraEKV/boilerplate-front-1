@@ -51,7 +51,7 @@ const SignIn = () => {
                 <Button onClick={handleSubmit} className="w-full py-5 text-base font-bold bg-primary text-white transition duration-200">Sign In</Button>
                 
                 <div>
-                    Don't have an account? 
+                    Dont have an account? 
                     <Link className="underline text-cyan-500 font-bold ml-2 " href={'/sign-up'}>Sign up</Link>
                 </div>
             </div>
