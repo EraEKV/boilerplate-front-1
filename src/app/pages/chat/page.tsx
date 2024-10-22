@@ -18,9 +18,7 @@ export default function Component() {
   const [messages, setMessages] = useState<MessageData[]>([]);
   const [input, setInput] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
-  const [hasScrollbar, setHasScrollbar] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const socket = useRef<ReturnType<typeof io> | null>(null);
 
   useEffect(() => {
