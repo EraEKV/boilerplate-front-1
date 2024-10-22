@@ -8,7 +8,6 @@ import { io } from 'socket.io-client'
 import ReactMarkdown from 'react-markdown'
 import { Toaster, toast } from 'sonner'
 
-
 interface MessageData {
   role: "user" | "assistant"; 
   content: string
@@ -17,11 +16,18 @@ interface MessageData {
 export default function Component() {
   const [messages, setMessages] = useState<MessageData[]>([]);
   const [input, setInput] = useState('');
-  const [isStreaming, setIsStreaming] = useState(false);
+  const [isStreaming, setIsStreaming] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const socket = useRef<ReturnType<typeof io> | null>(null);
 
   useEffect(() => {
+    const savedMessages = localStorage.getItem("chatHistory");
+    console.log(savedMessages);
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages));
+      setIsStreaming(false);
+    }
+
     socket.current = io(process.env.NEXT_PUBLIC_BACKEND_ORIGIN || 'ws://localhost:5000', {
       reconnectionDelayMax: 10000,
       transports: ["websocket"],
@@ -70,11 +76,18 @@ export default function Component() {
     messagesEndRef.current?.scrollIntoView();
   }, [messages]);  
 
+  useEffect(() => {
+    if (!isStreaming) {
+      localStorage.setItem("chatHistory", JSON.stringify(messages));
+    }
+  }, [isStreaming])
+
   const handleSend = async () => {
     if (input.trim()) {
       const newMessage: MessageData = { role: 'user', content: input };
       setMessages(prevMessages => [...prevMessages, newMessage]);
       setInput('');
+      localStorage.setItem("chatHistory", JSON.stringify([...messages, { role: 'user', content: input }]));
       setIsStreaming(true);
       socket.current?.emit("message", [...messages, { role: 'user', content: input }]);
     }
@@ -86,10 +99,7 @@ export default function Component() {
   }
 
   return (
-    <div className="flex max-w-4xl h-screen mx-auto flex-col pt-[2vh]">
-      <div className="p-4 text-primary-foreground">
-        <h2 className="text-xl font-semibold">AI Assistant</h2>
-      </div>
+    <div className="flex max-w-4xl h-screen mx-auto flex-col pt-[8vh]">
       <div className="flex-grow p-4 pb-0 space-y-2">
         {messages.map((message, index) => (
           <div
@@ -101,7 +111,7 @@ export default function Component() {
             }}
           >
             <div
-              className={`max-w-[70%] rounded-lg p-3 mb-5 ${message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+              className={`max-w-[70%] rounded-lg p-3 ${message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
             >
               <ReactMarkdown>
                 {message.content}
