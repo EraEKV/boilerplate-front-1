@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '../shared/ui/button';
 
 const Navbar = () => {
-    const hiddenPaths = ["/sign-in", "/sign-up"];
+    const hiddenPaths = ["/sign-in", "/sign-up", "/chat"];
     const path = usePathname();
     const isHiding = hiddenPaths.some((el) => path === el);
 
