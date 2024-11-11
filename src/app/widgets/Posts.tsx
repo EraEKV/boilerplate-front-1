@@ -11,8 +11,16 @@ const fetchPosts = async () => {
     return response.json();
 };
 
+
+interface Post {
+    userId: string;
+    id: number;
+    title: string;
+    body: string;
+}
+
 const Posts: React.FC = () => {
-    const { data, error, isLoading, isError } = useQuery<any, Error>('posts', fetchPosts);
+    const { data, error, isLoading, isError } = useQuery<Post[], Error>('posts', fetchPosts);
 
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error: {error.message}</p>;
@@ -21,7 +29,7 @@ const Posts: React.FC = () => {
         <div>
             <h2 className="text-2xl font-bold mb-4">Posts</h2>
             <ul>
-                {data.map((post: any) => (
+                {data?.map((post: Post) => (
                     <li key={post.id} className="mb-2 p-4 border rounded-lg">
                         <h3 className="font-semibold">{post.title}</h3>
                         <p>{post.body}</p>
