@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./widgets/Navbar";
+import ReactQueryProvider from '../providers/ReactQueryProvider';
 
 export const metadata: Metadata = {
   title: "Boilerplate",
@@ -17,7 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-open-sans antialiased">
         <Navbar />
-        {children}
+
+        <ReactQueryProvider>
+          {children}
+        </ReactQueryProvider>
       </body>
     </html>
   );
