@@ -15,7 +15,7 @@ interface UploadedFile {
   progress: number;
 }
 
-const uploadFile = async (file: File, onProgress: (progress: number) => void): Promise<UploadResponse> => {
+const uploadFile = async (file: File, _onProgress: (progress: number) => void): Promise<UploadResponse> => {
   const fileExtension = file.name.split(".").pop();
   const filename = `${uuidv4()}.${fileExtension}`;
 
@@ -41,7 +41,8 @@ const uploadFile = async (file: File, onProgress: (progress: number) => void): P
 
     return { url: uploadUrl };
   } catch (error) {
-    throw new Error("File upload failed");
+        console.log(error);
+        throw new Error("File upload failed");
   }
 };
 
